@@ -1,0 +1,10 @@
+{
+  "name": "simple-air-hockey",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simple free two-player air hockey on GitHub Pages and PeerJS",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node --test tests/*.test.cjs"
+  }
+}
