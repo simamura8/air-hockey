@@ -1,37 +1,106 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101a2d">
-  <meta name="description" content="URLを送って、ふたりでエアホッケー。無料・登録不要のシンプルなブラウザゲーム。">
-  <title>AIR HOCKEY · ふたりでエアホッケー</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="vendor/peerjs.min.js"></script>
-  <script defer src="physics.js"></script>
-  <script defer src="game.js"></script>
-</head>
-<body>
-  <main class="app">
-    <section class="panel">
-      <a class="brand" href="./" aria-label="トップへ">AH<span>↗</span></a>
-      <div><p class="eyebrow">SMALL GAME. BIG RALLY.</p>
-      <h1>AIR<br><span>HOCKEY</span><i>●</i></h1>
-      <p class="intro">離れていても、同じテーブルで。<br>URLを送って、さっそくひと勝負。</p></div>
-      <div class="controls">
-        <button class="primary" id="create">ルームをつくる <span>↗</span></button>
-        <form id="join-form"><label for="room">招待された方はこちら</label><div class="join-row"><input id="room" placeholder="ルームコード" maxlength="8" autocomplete="off" autocapitalize="characters" pattern="[A-Za-z0-9]{8}" required aria-label="8文字のルームコード"><button type="submit" id="join">参加 →</button></div></form>
-        <div id="invite" hidden><label for="invite-url">このURLを相手に送ってください</label><input id="invite-url" readonly><div class="invite-actions"><strong id="room-code"></strong><button id="copy" type="button">URLをコピー</button></div></div>
-        <div class="secondary"><button id="practice" type="button">ひとりで練習</button><button id="leave" type="button" hidden>退出する</button><button id="rematch" type="button" hidden>もう一度</button></div>
-      </div>
-      <div class="instructions"><span class="number">01</span><p>マウス・指・矢印キーで操作</p><span class="number">02</span><p>自分の陣地からパックを打つ</p><span class="number">03</span><p>先に5点取ったら勝ち！</p></div>
-      <p class="footnote">2 PLAYERS · NO SIGN-UP · FREE<br>オンライン対戦は回線によって接続できない場合があります。</p>
-    </section>
-    <section class="arena" aria-label="エアホッケーのゲーム画面">
-      <div class="scoreboard"><div><span class="tag cyan">YOU</span><strong id="your-score">0</strong></div><div class="score-center"><span class="live-dot"></span><span id="mode">PRACTICE</span><small>FIRST TO 5</small></div><div><strong id="their-score">0</strong><span class="tag coral" id="opponent">CPU</span></div></div>
-      <div class="table-wrap"><canvas id="table" width="600" height="840" tabindex="0" aria-label="エアホッケー。自分は下側。マウス、タッチ、矢印キーで操作します。"></canvas><div class="table-caption" id="caption">ひとりで練習中</div></div>
-      <div class="status-bar"><span class="status-dot" id="status-dot"></span><p id="status" role="status" aria-live="polite">まずは練習。下の青いマレットを動かしてみよう。</p></div>
-    </section>
-  </main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101a2d" />
+    <meta
+      name="description"
+      content="URLを送って、ふたりでエアホッケー。無料・登録不要のシンプルなブラウザゲーム。"
+    />
+    <title>AIR HOCKEY · ふたりでエアホッケー</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="vendor/peerjs.min.js"></script>
+    <script defer src="physics.js"></script>
+    <script defer src="game.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel">
+        <a class="brand" href="./" aria-label="トップへ">AH<span>↗</span></a>
+        <div>
+          <p class="eyebrow">SMALL GAME. BIG RALLY.</p>
+          <h1>AIR<br /><span>HOCKEY</span><i>●</i></h1>
+          <p class="intro">
+            離れていても、同じテーブルで。<br />URLを送って、さっそくひと勝負。
+          </p>
+        </div>
+        <div class="controls">
+          <button class="primary" id="create">
+            ルームをつくる <span>↗</span>
+          </button>
+          <form id="join-form">
+            <label for="room">招待された方はこちら</label>
+            <div class="join-row">
+              <input
+                id="room"
+                placeholder="ルームコード"
+                maxlength="8"
+                autocomplete="off"
+                autocapitalize="characters"
+                pattern="[A-Za-z0-9]{8}"
+                required
+                aria-label="8文字のルームコード"
+              /><button type="submit" id="join">参加 →</button>
+            </div>
+          </form>
+          <div id="invite" hidden>
+            <label for="invite-url">このURLを相手に送ってください</label
+            ><input id="invite-url" readonly />
+            <div class="invite-actions">
+              <strong id="room-code"></strong
+              ><button id="copy" type="button">URLをコピー</button>
+            </div>
+          </div>
+          <div class="secondary">
+            <button id="practice" type="button">ひとりで練習</button
+            ><button id="leave" type="button" hidden>退出する</button
+            ><button id="rematch" type="button" hidden>もう一度</button>
+          </div>
+        </div>
+        <div class="instructions">
+          <span class="number">01</span>
+          <p>マウス・指・矢印キーで操作</p>
+          <span class="number">02</span>
+          <p>自分の陣地からパックを打つ</p>
+          <span class="number">03</span>
+          <p>先に5点取ったら勝ち！</p>
+        </div>
+        <p class="footnote">
+          2 PLAYERS · NO SIGN-UP · FREE<br />オンライン対戦は回線によって接続できない場合があります。
+        </p>
+      </section>
+      <section class="arena" aria-label="エアホッケーのゲーム画面">
+        <div class="scoreboard">
+          <div>
+            <span class="tag cyan">YOU</span><strong id="your-score">0</strong>
+          </div>
+          <div class="score-center">
+            <span class="live-dot"></span><span id="mode">PRACTICE</span
+            ><small>FIRST TO 5</small>
+          </div>
+          <div>
+            <strong id="their-score">0</strong
+            ><span class="tag coral" id="opponent">CPU</span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <canvas
+            id="table"
+            width="600"
+            height="840"
+            tabindex="0"
+            aria-label="エアホッケー。自分は下側。マウス、タッチ、矢印キーで操作します。"
+          ></canvas>
+          <div class="table-caption" id="caption">ひとりで練習中</div>
+        </div>
+        <div class="status-bar">
+          <span class="status-dot" id="status-dot"></span>
+          <p id="status" role="status" aria-live="polite">
+            まずは練習。下の青いマレットを動かしてみよう。
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>

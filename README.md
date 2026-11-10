@@ -1,5 +1,7 @@
 # AIR HOCKEY
 
+[ゲームを開く](https://simamura8.github.io/air-hockey/)
+
 HTML / CSS / JavaScriptだけの、シンプルなエアホッケー。GitHub Pagesで公開し、PeerJS / WebRTCで2人のブラウザを直接つなぎます。ビルドもゲーム用サーバーの契約も不要です。
 
 ## 遊び方
@@ -42,14 +44,14 @@ npm test
 
 ## ファイル
 
-| ファイル | 役割 |
-| --- | --- |
-| `index.html` | 画面・操作ボタン |
-| `style.css` | PC・スマホの見た目 |
-| `game.js` | 描画・操作・CPU・オンライン接続 |
-| `physics.js` | 移動・衝突判定・得点 |
-| `vendor/peerjs.min.js` | PeerJS 1.5.5（MIT、同梱ライセンス参照） |
-| `server.cjs` | ローカル確認用サーバー |
-| `tests/physics.test.cjs` | ゲームルールのテスト |
+| ファイル                 | 役割                                    |
+| ------------------------ | --------------------------------------- |
+| `index.html`             | 画面・操作ボタン                        |
+| `style.css`              | PC・スマホの見た目                      |
+| `game.js`                | 描画・操作・CPU・オンライン接続         |
+| `physics.js`             | 移動・衝突判定・得点                    |
+| `vendor/peerjs.min.js`   | PeerJS 1.5.5（MIT、同梱ライセンス参照） |
+| `server.cjs`             | ローカル確認用サーバー                  |
+| `tests/physics.test.cjs` | ゲームルールのテスト                    |
 
 公式資料: [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)、[PeerJS FAQ](https://peerjs.com/client/faq)、[無料TURN終了のお知らせ](https://github.com/orgs/peers/discussions/1172)
